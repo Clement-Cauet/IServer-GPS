@@ -37,6 +37,7 @@ form, table {
     width: 90%;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 table {
@@ -103,7 +104,12 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-    background-color: #323232;
+    background-color: #4f4f4f;
+}
+
+#serial, #tcp {
+    display: inline-block;
+    width: 45%;
 }
 
 @media screen and (max-width: 1200px) {

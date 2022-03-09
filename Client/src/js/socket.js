@@ -9,18 +9,30 @@ document.getElementById('connect').addEventListener('click', function() {
     var password    = document.getElementById('password').value;
     var dbName      = document.getElementById('dbName').value;
 
-    var socket = new WebSocket("ws://"+ serverName +":3002");
+    var socket = new WebSocket("ws://"+ serverName +":3006");
 
+    var serial  = document.getElementById('serial');
+    var tcp     = document.getElementById('tcp');
 
     /* WebSocket open */
     socket.onopen = function() {
         document.getElementById('connexion').hidden = true;
         document.getElementById('table').hidden = false;
 
-        var data = "connection;"+hostName+";"+userName+";"+password+";"+dbName;
+        var data = "connection;"+serverName+";"+hostName+";"+userName+";"+password+";"+dbName;
         socket.send(data);
 
         console.log("Client WebSocket: Nouvelle connexion");
+    };
+
+    /* Send serial value on the server */
+    serial.onclick = function() {
+        socket.send("serial");
+    };
+
+    /* Send serial value on the server */
+    tcp.onclick = function() {
+        socket.send("tcp");
     };
 
     /* WebSocket close */

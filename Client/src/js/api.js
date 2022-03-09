@@ -1,15 +1,15 @@
 /* API Mapbox key */
 mapboxgl.accessToken = 'pk.eyJ1IjoiMHZlcmRyYXciLCJhIjoiY2t1ZHFna2k4MWQ1YzMybDlzOWMxbnI2ZyJ9.UBRgQa9a0LYDml-i4GjR0Q';
 
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [2.2997429, 49.8775471], // Init the position of the center in the map
+    zoom: 1
+});
+
 function point(message)
 {
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [2.2997429, 49.8775471], // Init the position of the center in the map
-        zoom: 1
-    });
-
     const point = {
         'type': 'geojson',
         'data': {
@@ -22,16 +22,15 @@ function point(message)
         }
     };
 
-    for(var i = 0; i < message[0].length; i++){
-        marker(message[0][i], map, point);
-    }
+    marker(message[0], map, point);
+
 }
 
 function marker(data, map, point){
-    var id          = data["id"];
-    var latitude    = data["latitude"];
-    var longitude   = data["longitude"];
-    var date        = data["date"];
+    var id          = data[0];
+    var latitude    = data[1];
+    var longitude   = data[2];
+    var date        = data[3];
 
     // Creation of the marker
     var el = document.createElement('div');
